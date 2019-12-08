@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 @Table(name="messages")
 public class Message {
 
+    public Message() {
+    }
+
     public Message(@Size(min = 1, max = 160) String messageText) {
         this.dateOfCreation = LocalDateTime.now();
         this.messageText = messageText;

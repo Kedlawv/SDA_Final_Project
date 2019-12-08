@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>add-new-message</title>
 </head>
 <body>
 
+<form action="#" th:action="@{/messages/add}" id="add_message" th:object="${message}" method="post">
+    <div class="form-group">
 
+       <textarea form="add_message" rows="4" cols="50" placeholder="Enter your text here" name="messageText" th:field="*{messageText}"></textarea>
+    </div>
 
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
 
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
