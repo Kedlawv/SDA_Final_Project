@@ -30,7 +30,8 @@ public class MessageController {
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute Message message){
+    public String add(@ModelAttribute Message message, Model model){
+        model.addAttribute("message", message);
         ms.addMessage(message);
         return "confirmation";
     }

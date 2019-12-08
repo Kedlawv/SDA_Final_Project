@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>confirmation</title>
+</head>
+<body>
+
+<div>
+
+    <p th:text="${message.getMessageText()}"></p>
+    Created on: <p th:text="${message.getDateOfCreation()}"></p>
+    Message id: <p th:text="${message.getId()}"></p>
+</div>
+
+</body>
+</html>

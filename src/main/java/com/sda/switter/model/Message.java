@@ -29,6 +29,9 @@ public class Message {
     @Column(name="message_text")
     private String messageText;
 
+    public long getId() {
+        return id;
+    }
 
     public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
