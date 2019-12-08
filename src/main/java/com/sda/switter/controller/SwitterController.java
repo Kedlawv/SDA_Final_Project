@@ -15,4 +15,10 @@ public class SwitterController {
         return "Cześć " + principal.getName() + "!";
     }
 
+    @GetMapping("/xyz")
+    @ResponseBody
+    public String showSomething() {
+        return "Something for everyone";
+    }
+
 }

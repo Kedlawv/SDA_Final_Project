@@ -19,9 +19,17 @@ public class SwitterSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-
         auth.jdbcAuthentication().dataSource(securityDataSource);
     }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin()
+                    .permitAll()
+                .and()
+                    .authorizeRequests()
+                .antMatchers("/").hasRole("USER")
+                .antMatchers("/xyz").permitAll()
+                .anyRequest().authenticated();
+    }
 }
