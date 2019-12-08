@@ -36,4 +36,10 @@ public class MessageController {
         return "confirmation";
     }
 
+    @GetMapping("/home")
+    public String home(Model model){
+        model.addAttribute("messages", ms.getAll());
+        return "home";
+    }
+
 }

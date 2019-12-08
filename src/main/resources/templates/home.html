@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Public Message Board</title>
+</head>
+<body>
+<div th:each="message : ${messages}">
+
+    <p >
+        <span th:text="${message.getMessageText()}"></span>
+    </p>
+    <p >
+        Created on: <span th:text="${message.getDateOfCreation()}"></span>
+    </p>
+    Message id: <span th:text="${message.getId()}">Message id: </span>
+    <p>______________________________________________</p>
+
+</div>
+
+
+</body>
+</html>
