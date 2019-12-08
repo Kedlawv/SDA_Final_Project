@@ -1,14 +1,12 @@
 package com.sda.switter.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name="messages")
 public class Message {
 
     public Message(@Size(min = 1, max = 160) String messageText) {
@@ -18,11 +16,14 @@ public class Message {
 
     @Id
     @GeneratedValue
+    @Column(name="id")
     private long id;
 
     @NotNull
+    @Column(name="date_of_creation")
     private LocalDateTime dateOfCreation;
     @Size(min = 1, max = 160)
+    @Column(name="message_text")
     private String messageText;
 
 
