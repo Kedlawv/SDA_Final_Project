@@ -2,6 +2,7 @@ package com.sda.switter.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,45 +16,50 @@ import java.util.logging.Logger;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.sda.switter")
-@PropertySource("classpath:persistence-mysql.properties")
 public class SwitterAppConfig {
 
-    @Autowired
-    private Environment env;
-
     private Logger logger = Logger.getLogger(getClass().getName());
+
+    @Value("${spring.datasource.driverClassName}")
+    private String h2Driver;
+    @Value("${spring.datasource.url}")
+    private String h2Url;
+    @Value("$spring.datasource.username")
+    private String h2UserName;
+    @Value("spring.datasource.password")
+    private String h2Password;
+
 
     @Bean
     public DataSource securityDataSource() {
         ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
 
         try {
-            securityDataSource.setDriverClass(env.getProperty("jdbc.driver"));
+            securityDataSource.setDriverClass(h2Driver);
         } catch (PropertyVetoException exc) {
             throw new RuntimeException(exc);
         }
 
-        logger.info(">>> jdbc.url=" + env.getProperty("jdbc.url"));
-        logger.info(">>> jdbc.user=" + env.getProperty("jdbc.user"));
+        logger.info(">>> jdbc.url=" + h2Url);
+        logger.info(">>> jdbc.user=" + h2UserName);
 
-        securityDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
-        securityDataSource.setUser(env.getProperty("jdbc.user"));
-        securityDataSource.setPassword(env.getProperty("jdbc.password"));
+        securityDataSource.setJdbcUrl(h2Url);
+        securityDataSource.setUser(h2UserName);
+        securityDataSource.setPassword(h2Password);
 
-        securityDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
-        securityDataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
-        securityDataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
-        securityDataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
+//        securityDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
+//        securityDataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
+//        securityDataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
+//        securityDataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
 
         return securityDataSource;
     }
 
-    private int getIntProperty(String propName) {
-        String propVal = env.getProperty(propName);
-
-        int intPropVal = Integer.parseInt(propVal);
-
-        return intPropVal;
-    }
+//    private int getIntProperty(String propName) {
+//        String propVal = env.getProperty(propName);
+//
+//        int intPropVal = Integer.parseInt(propVal);
+//
+//        return intPropVal;
+//    }
 }

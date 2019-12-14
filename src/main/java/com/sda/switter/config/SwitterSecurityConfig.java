@@ -29,7 +29,13 @@ public class SwitterSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                 .antMatchers("/").hasRole("USER")
-                .antMatchers("/xyz").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/xyz","/h2-console/**","/favicon.ico")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .headers()
+                .frameOptions()
+                .sameOrigin().and().csrf().disable();
     }
 }
