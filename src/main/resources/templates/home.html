@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Public Message Board</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/messages.css}"/>
 </head>
 <body>
-<div th:each="message : ${messages}">
+<div id="message" th:each="message : ${messages}"  >
 
     <p >
-        <span th:text="${message.getMessageText()}"></span>
+        <span id="wiadomosc" th:text="${message.getMessageText()}"></span>
     </p>
-    <p >
-        Created on: <span th:text="${message.getDateOfCreation()}"></span>
+    <p class="date-id">
+        Created on: <span  th:text="${message.getDateOfCreation()}"></span>
     </p>
-    Message id: <span th:text="${message.getId()}">Message id: </span>
-    <p>______________________________________________</p>
+   <p class="date-id"> Message id: <span id="id" th:text="${message.getId()}">Message id: </span>
+   </p>
+
 
 </div>
 

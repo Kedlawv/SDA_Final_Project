@@ -1,0 +1,18 @@
+
+#message{
+    background-color: aquamarine;
+    padding: 10px;
+    margin: 10px;
+    max-width:350px;
+}
+#wiadomosc{
+    font-family: 'Lucida Sans Unicode', sans-serif;
+}
+
+.date-id{
+    font-size: 12px;
+}
+
+div {
+    border-radius: 20px;
+}
