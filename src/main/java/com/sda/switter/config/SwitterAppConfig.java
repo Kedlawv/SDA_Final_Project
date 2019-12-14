@@ -30,7 +30,7 @@ public class SwitterAppConfig {
     private String h2Password;
 
 
-    @Bean
+
     public DataSource securityDataSource() {
         ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
 
