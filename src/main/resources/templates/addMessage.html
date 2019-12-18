@@ -9,10 +9,17 @@
 <form action="#" th:action="@{/messages/add}" id="add_message" th:object="${message}" method="post">
     <div class="form-group">
 
-       <textarea form="add_message" rows="4" cols="50" placeholder="Enter your text here" name="messageText" th:field="*{messageText}"></textarea>
+       <textarea form="add_message" rows="4" cols="50" placeholder="Enter your text here"
+                 name="messageText" th:field="*{messageText}"></textarea>
+        <br/>
+        <input type="hidden" th:field="*{dateOfCreation}"/>
     </div>
 
     <button type="submit" class="btn btn-primary">Add</button>
+<!--    <span th:text="${#fields.hasErrors('messageText')}"></span>-->
+    <br/><br/>
+    <span th:if="${#fields.hasErrors('messageText')}"
+          th:errors="*{messageText}">Error message</span>
 </form>
 
 

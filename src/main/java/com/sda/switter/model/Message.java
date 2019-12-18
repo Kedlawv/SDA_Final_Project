@@ -1,5 +1,7 @@
 package com.sda.switter.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,6 +19,10 @@ public class Message {
         this.messageText = messageText;
     }
 
+    public Message(@NotNull LocalDateTime dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
+    }
+
     @Id
     @GeneratedValue
     @Column(name="id")
@@ -24,8 +30,11 @@ public class Message {
 
     @NotNull
     @Column(name="date_of_creation")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateOfCreation;
-    @Size(min = 1, max = 160)
+
+    @NotNull
+    @Size(min = 1, max = 160, message = "Message must be between 1 - 160 characters long")
     @Column(name="message_text")
     private String messageText;
 
@@ -49,3 +58,8 @@ public class Message {
         this.messageText = messageText;
     }
 }
+
+
+
+
+
