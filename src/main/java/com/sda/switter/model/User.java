@@ -1,10 +1,12 @@
 package com.sda.switter.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -12,20 +14,39 @@ public class User {
     private long id;
 
     private String email;
-    private String handle;
+    private String username;
     private String password;
+    private int enabled;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Authority> authorities;
 
     public User() {
     }
 
-    public User(String email, String handle, String password) {
+    public User(String email, String username, String password) {
         this.email = email;
-        this.handle = handle;
+        this.username = username;
         this.password = password;
+        this.enabled = 1;
+        this.authorities = new HashSet<>();
+        this.authorities.add(new Authority(username, "ROLE_USER"));
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
 
     public String getEmail() {
@@ -36,12 +57,12 @@ public class User {
         this.email = email;
     }
 
-    public String getHandle() {
-        return handle;
+    public String getUsername() {
+        return username;
     }
 
-    public void setHandle(String handle) {
-        this.handle = handle;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
