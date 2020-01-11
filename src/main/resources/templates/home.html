@@ -7,7 +7,9 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/messages.css}"/>
 </head>
 <body>
-<div id="message" th:each="message : ${messages}"  >
+<div id="container">
+
+<div class="center" id="message" th:each="message : ${messages}"  >
 
     <p >
         <span id="wiadomosc" th:text="${message.getMessageText()}"></span>
@@ -15,12 +17,14 @@
     <p class="date-id">
         Created on: <span  th:text="${message.getDateOfCreation()}"></span>
     </p>
-   <p class="date-id"> Message id: <span id="id" th:text="${message.getId()}">Message id: </span>
+   <p class="date-id"> Message id: <span id="id" th:text="${message.getId()}"></span>
    </p>
-
-
+</div>
+<div class="center">
+    <a href="/messages/add">Write message</a>
 </div>
 
 
+</div>
 </body>
 </html>
