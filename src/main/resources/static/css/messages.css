@@ -14,11 +14,15 @@ html{
 div {
     border-radius: 10px;
 }
+textarea{
+    width: 100%;
+    background-color: aquamarine;
+    border: aquamarine;
+}
 
 .center{
     background-color: aquamarine;
     padding: 10px;
-
     max-width:350px;
     margin-left: auto;
     margin-right: auto;

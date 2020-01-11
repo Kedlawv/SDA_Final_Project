@@ -8,15 +8,18 @@
 <body>
 
 <form action="#" th:action="@{/add}" id="add_message" th:object="${message}" method="post">
-    <div class="form-group">
 
-       <textarea form="add_message" rows="4" cols="50" placeholder="Enter your text here"
+    <div class="form-group">
+<div class="center">
+       <textarea form="add_message" rows="4" placeholder="Enter your text here"
                  name="messageText" th:field="*{messageText}"></textarea>
+</div>
         <br/>
         <input type="hidden" th:field="*{dateOfCreation}"/>
     </div>
-
+<div class="center">
     <button type="submit" class="btn btn-primary">Add</button>
+</div>
 <!--    <span th:text="${#fields.hasErrors('messageText')}"></span>-->
     <br/><br/>
     <span th:if="${#fields.hasErrors('messageText')}"
