@@ -12,18 +12,11 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @Controller
-@RequestMapping("/messages")
+@RequestMapping("/")
 public class MessageController {
 
     @Autowired
     MessagesService ms;
-
-    @GetMapping
-    public String hello(Model model){
-        model.addAttribute("message", "Hello as attribute");
-        return "hello";
-    }
-
 
     @GetMapping("/add")
     public String add(Model model){
@@ -34,16 +27,17 @@ public class MessageController {
     }
 
     @PostMapping("/add")
-    public String add(@Valid Message message, Errors errors){
+    public String add(@Valid Message message, Errors errors, Model model){
         if(errors.hasErrors()){
             return "addMessage";
         }
 
         ms.addMessage(message);
-        return "confirmation";
+        model.addAttribute("messages", ms.getAll());
+        return "home";
     }
 
-    @GetMapping("/home")
+    @GetMapping
     public String home(Model model){
         model.addAttribute("messages", ms.getAll());
         return "home";

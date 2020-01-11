@@ -15,7 +15,6 @@ import java.beans.PropertyVetoException;
 import java.util.logging.Logger;
 
 @Configuration
-@EnableWebMvc
 public class SwitterAppConfig {
 
     private Logger logger = Logger.getLogger(getClass().getName());
