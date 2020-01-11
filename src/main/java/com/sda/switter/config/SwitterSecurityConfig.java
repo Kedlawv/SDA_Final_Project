@@ -34,7 +34,7 @@ public class SwitterSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                 .antMatchers("/").hasRole("USER")
-                .antMatchers("/xyz","/h2-console/**","/favicon.ico")
+                .antMatchers("/xyz","/h2-console/**","/favicon.ico","/messages/home")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
