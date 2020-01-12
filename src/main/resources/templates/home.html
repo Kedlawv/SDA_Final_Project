@@ -10,7 +10,15 @@
 <div id="container">
     <div th:insert="top-bar::header"></div>
 
-<div class="center" id="message" th:each="message : ${messages}"  >
+    <div class="center">
+        <form action="/login" th:action="@{/login}">
+
+            <input type="submit" class="center" value="Sign in"/>
+
+        </form>
+    </div>
+
+    <div class="center" id="message" th:each="message : ${messages}">
 
         <form th:action="@{/details(messageId=${message.getId()})}" method="post">
             <button type="submit" class="btn btn-primary">
@@ -29,6 +37,13 @@
         <a href="/add">Write message</a>
     </div>
 
+    <div class="center" sec:authorize="hasRole('ROLE_USER')">
+        <form action="#" th:action="@{/logout}">
+
+            <input type="submit" class="center" value="Logout"/>
+
+        </form>
+    </div>
 
 </div>
 </body>
