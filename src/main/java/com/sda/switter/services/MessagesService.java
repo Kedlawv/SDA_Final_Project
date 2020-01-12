@@ -7,6 +7,7 @@ import com.sda.switter.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +52,22 @@ public class MessagesService {
         }
 
         return message;
+    }
+
+    @Transactional
+    public void addReply(Message message, Message reply){
+
+        Optional optMessage = messageRepo.findById(message.getId());
+        Message currentMessage = new Message();
+        if(optMessage.isPresent()){
+            currentMessage = (Message)optMessage.get();
+        }
+        reply.setRepliedTo(currentMessage.getId());
+        reply = messageRepo.save(reply);
+        currentMessage.addReply(reply);
+
+
+        messageRepo.save(message);
     }
 
 }

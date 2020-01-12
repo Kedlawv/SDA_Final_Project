@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name="messages")
@@ -18,6 +19,7 @@ public class Message {
         this.dateOfCreation = LocalDateTime.now();
         this.messageText = messageText;
         this.owner = user;
+        this.repliedTo = -1;
     }
 
     public Message(@NotNull LocalDateTime dateOfCreation) {
@@ -42,6 +44,23 @@ public class Message {
     @NotNull
     @ManyToOne
     private User owner;
+
+    @OneToMany
+    private Set<Message> replies;
+
+    private long repliedTo;
+
+    public void setReplies(Set<Message> replies) {
+        this.replies = replies;
+    }
+
+    public long getRepliedTo() {
+        return repliedTo;
+    }
+
+    public void setRepliedTo(long repliedTo) {
+        this.repliedTo = repliedTo;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -73,6 +92,14 @@ public class Message {
 
     public void setMessageText(String messageText) {
         this.messageText = messageText;
+    }
+
+    public void addReply(Message reply) {
+        this.replies.add(reply);
+    }
+
+    public Set<Message> getReplies() {
+        return replies;
     }
 }
 

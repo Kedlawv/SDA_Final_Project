@@ -44,5 +44,11 @@ public class SwitterApplication implements ApplicationRunner {
         ms.addMessage(m1);
         ms.addMessage(m2);
         ms.addMessage(m3);
+
+        Message r1 = new Message("Keto rules",
+                userService.getUserByUserName("Waldek"));
+
+        ms.addReply(m2,r1);
+
     }
 }
