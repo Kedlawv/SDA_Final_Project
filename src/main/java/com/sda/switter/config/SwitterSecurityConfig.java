@@ -44,30 +44,6 @@ public class SwitterSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sameOrigin().and().csrf().disable();
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.formLogin()
-//                    .permitAll()
-//                .and()
-//                    .authorizeRequests()
-//                .antMatchers("/").hasRole("USER")
-//                .antMatchers("/xyz","/h2-console/**","/favicon.ico","/messages/home"
-//                        ,"/css/**", "/js/**")
-//                .permitAll()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .headers()
-//                .frameOptions()
-//                .sameOrigin().and().csrf().disable();
-//    }
-
-
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.ignoring().antMatchers("/css/**", "/js/**");
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
