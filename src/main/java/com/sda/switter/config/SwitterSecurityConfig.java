@@ -29,14 +29,13 @@ public class SwitterSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
-                    .permitAll()
+        http.authorizeRequests()
+                .antMatchers("/", "/details", "/h2-console", "/favicon.ico", "/css/**", "/js/**").permitAll()
+                .antMatchers("/add").hasRole("USER")
                 .and()
-                    .authorizeRequests()
-                .antMatchers("/").hasRole("USER")
-                .antMatchers("/xyz","/h2-console/**","/favicon.ico","/messages/home"
-                        ,"/css/**", "/js/**")
-                .permitAll()
+                .formLogin().permitAll()
+                .and()
+                .authorizeRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -44,6 +43,25 @@ public class SwitterSecurityConfig extends WebSecurityConfigurerAdapter {
                 .frameOptions()
                 .sameOrigin().and().csrf().disable();
     }
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.formLogin()
+//                    .permitAll()
+//                .and()
+//                    .authorizeRequests()
+//                .antMatchers("/").hasRole("USER")
+//                .antMatchers("/xyz","/h2-console/**","/favicon.ico","/messages/home"
+//                        ,"/css/**", "/js/**")
+//                .permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .headers()
+//                .frameOptions()
+//                .sameOrigin().and().csrf().disable();
+//    }
+
 
 //    @Override
 //    public void configure(WebSecurity web) {
