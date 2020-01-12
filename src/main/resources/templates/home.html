@@ -17,6 +17,9 @@
     <p class="date-id">
         Created on: <span  th:text="${message.getDateOfCreation()}"></span>
     </p>
+    <p class="date-id">
+        User: <span  th:text="${message.getOwner().getUsername()}"></span>
+    </p>
    <p class="date-id"> Message id: <span id="id" th:text="${message.getId()}"></span>
    </p>
 </div>

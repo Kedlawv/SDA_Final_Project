@@ -1,6 +1,8 @@
 package com.sda.switter.services;
 
 import com.sda.switter.dao.MessageRepository;
+import com.sda.switter.dao.UserRepository;
+import com.sda.switter.dto.MessageDto;
 import com.sda.switter.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,14 +14,27 @@ import java.util.List;
 public class MessagesService {
 
     @Autowired
-    private MessageRepository repository;
+    private MessageRepository messageRepo;
+    @Autowired
+    private UserRepository userRepo;
+
+    public void addMessage(MessageDto messageDto, String username){
+        Message message = new Message();
+        message.setDateOfCreation(LocalDateTime.now());
+        message.setMessageText(messageDto.getMessageText());
+        message.setOwner(userRepo.getUserByUsername(username));
+
+        messageRepo.save(message);
+    }
 
     public void addMessage(Message message){
         message.setDateOfCreation(LocalDateTime.now());
-        repository.save(message);
+        message.setMessageText(message.getMessageText());
+
+        messageRepo.save(message);
     }
 
     public List<Message> getAll(){
-        return (List<Message>) repository.findAll();
+        return (List<Message>) messageRepo.findAll();
     }
 }

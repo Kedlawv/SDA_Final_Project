@@ -30,9 +30,13 @@ public class SwitterApplication implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         userService.addUser(new User("waldek@waldek.pl", "Waldek", passwordEncoder.encode("12345")));
-        Message m1 = new Message("Beware of the Dark Side of the Force");
-        Message m2 = new Message("Sugar makes you sleepy");
-        Message m3 = new Message("Failures are simply stepping stones to success");
+
+        Message m1 = new Message("Beware of the Dark Side of the Force",
+                userService.getUserByUserName("Waldek"));
+        Message m2 = new Message("Sugar makes you sleepy",
+                userService.getUserByUserName("Waldek"));
+        Message m3 = new Message("Failures are simply stepping stones to success",
+                userService.getUserByUserName("Waldek"));
         ms.addMessage(m1);
         ms.addMessage(m2);
         ms.addMessage(m3);

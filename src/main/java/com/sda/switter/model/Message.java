@@ -14,9 +14,10 @@ public class Message {
     public Message() {
     }
 
-    public Message(@Size(min = 1, max = 160) String messageText) {
+    public Message(@Size(min = 1, max = 160) String messageText, User user) {
         this.dateOfCreation = LocalDateTime.now();
         this.messageText = messageText;
+        this.owner = user;
     }
 
     public Message(@NotNull LocalDateTime dateOfCreation) {
@@ -37,6 +38,22 @@ public class Message {
     @Size(min = 1, max = 160, message = "Message must be between 1 - 160 characters long")
     @Column(name="message_text")
     private String messageText;
+
+    @NotNull
+    @ManyToOne
+    private User owner;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 
     public long getId() {
         return id;
