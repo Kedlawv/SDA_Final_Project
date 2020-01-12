@@ -55,4 +55,13 @@ public class MessageController {
         return "home";
     }
 
+    @PostMapping("/details")
+    public String details(@RequestParam("messageId") Long id, Model model) {
+        Message message = ms.findById(id);
+
+        model.addAttribute("message", message);
+
+        return "messageDetails";
+    }
+
 }

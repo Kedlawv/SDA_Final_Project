@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MessagesService {
@@ -37,4 +38,19 @@ public class MessagesService {
     public List<Message> getAll(){
         return (List<Message>) messageRepo.findAll();
     }
+
+    public Message findById(Long id) {
+        Optional<Message> result = messageRepo.findById(id);
+
+        Message message = null;
+
+        if (result.isPresent()) {
+            message = result.get();
+        } else {
+            throw new RuntimeException("Message not found: id " + id);
+        }
+
+        return message;
+    }
+
 }
