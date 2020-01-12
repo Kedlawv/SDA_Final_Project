@@ -19,6 +19,11 @@ textarea{
     background-color: aquamarine;
     border: aquamarine;
 }
+button{
+    width: 100%;
+    background-color: aquamarine;
+    border: aquamarine;
+}
 
 .center{
     background-color: aquamarine;
